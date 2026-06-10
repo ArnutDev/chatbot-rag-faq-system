@@ -1,0 +1,32 @@
+# 1. Python (FastAPI)
+__pycache__/
+app/__pycache__
+*.pyc
+.venv/
+.env
+
+# 2. Database & Vector DB (ChromaDB / MySQL)
+# ใส่ / ต่อท้ายโฟลเดอร์เพื่อให้ Git มั่นใจว่ายกเว้นทั้งโฟลเดอร์
+chroma_db/
+mysql_data/
+mongo_data/
+*.sqlite3
+
+# 3. Node.js (React / Dashboard)
+node_modules/
+.eslintcache
+build/
+dist/
+
+# 4. Data & Evaluations
+rag_evaluation_dataset.jsonl
+test/
+# 5. OS files
+.DS_Store
+Thumbs.db
+
+test_chat_rag_memory copy.py
+
+Backend/fastapi/app/services/llm/chroma_db/
+Backend/fastapi/app/services/llm/test_chat_rag_memory_original.py
+Backend/fastapi/app/services/llm/chroma_db/chroma.sqlite3

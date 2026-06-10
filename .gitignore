@@ -1,0 +1,24 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Database
+mysql_data/
+mongo_data/
+
+# ChromaDB
+Backend/fastapi/app/services/llm/chroma_db/
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/

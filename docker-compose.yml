@@ -1,0 +1,93 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest 
+    container_name: backend-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    restart: always
+    depends_on:
+      - mysql
+
+  chromadb:
+    image: chromadb/chroma:1.3.7
+    container_name: chromadb-server
+    volumes:
+      - ./Backend/fastapi/app/services/llm/chroma_db:/data
+    environment:
+      - PERSIST_DIRECTORY=/data
+      - IS_PERSISTENT=TRUE
+    ports:
+      - "4000:8000"
+
+  mongodb:
+    image: mongo:7.0 
+    container_name: mongodb-server
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    restart: unless-stopped
+  
+  ngrok:
+    image: ngrok/ngrok:3 
+    restart: always
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    command:
+      - "http"
+      - "--url=${NGROK_DOMAIN}"
+      - "backend:8000"
+    depends_on:
+      - backend
+    
+  # --- 3. FastAPI 
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: fastapi-server
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+      - chromadb
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # --- 4. React Frontend 
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: react-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
