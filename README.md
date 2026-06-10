@@ -38,7 +38,7 @@ The system consists of:
 
 ### Login
 
-![Login](images/Login.png)
+![Login](images/login.png)
 
 ### Web Chat Interface
 
