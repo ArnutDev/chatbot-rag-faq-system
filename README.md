@@ -323,6 +323,3 @@ Responsible for:
 ## License
 
 This project was developed for educational and research purposes.
-
-```
-```
