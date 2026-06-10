@@ -34,6 +34,41 @@ The system consists of:
 
 ---
 
+## Screenshots
+
+### Login
+
+![Login](images/Login.png)
+
+### Web Chat Interface
+
+![Web Chat Interface](images/web-chat.png)
+
+### LINE Chat Interface
+![LINE Chat Interface](images/line-chat.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](images/dashboard.png)
+
+### Form Add Data
+
+![Form Add Data](images/add-data-form.png)
+
+### Data Management
+
+![Data Management](images/manage-data.png)
+
+### Chat History
+
+![Chat History](images/chat-history.png)
+
+### Edit Prompt
+
+![Edit Prompt](images/edit-prompt.png)
+
+---
+
 ## System Architecture
 
 ```text
@@ -44,7 +79,7 @@ FastAPI Backend
         ├── Authentication
         ├── Chat Service
         ├── RAG Service
-        ├── Dashboard Service
+        ├── Admin Services (Dashboard, Form Add Data, Data Management, Chat History, Edit Prompt)
         │
         ├── MySQL
         ├── MongoDB
