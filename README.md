@@ -278,8 +278,8 @@ ADMIN_PASSWORD=replace_with_admin_password
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
-cd project
+git clone https://github.com/ArnutDev/chatbot-rag-faq-system.git
+cd chatbot-rag-faq-system
 ```
 
 ### Build and Run Containers
